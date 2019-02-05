@@ -8,28 +8,15 @@ You are being provided with a data set of 5113 tweets in a file (*full-corpus.cs
 **Notice - some of the tweets are tagged as 'irrelevant'. For this project, they truly are. You may safely ignore them.**
 
 # Teams
-Teams have been assigned for this project as follows. They are fixed - no switching or cooperating across team lines. It is up to teammates to ensure that their partner adheres to the <a href="https://www.american.edu/academics/integrity/code.cfm">American University Honor Code.</a>
-
-0. Meseck Drew & Sleiman Sarah
-2. Hirsh Olivia & Cohen-Trivinos Marc
-3. Ngo Julie & Yang Zhenming
-4. Teo-Diaz Marlon & Vega-Aponte Angelica
-5. Doiron Benjamin & Euodias Gabriel
-6. Riley Nathaniel & Dicolandrea Gennaro
-7. Farley Liam & Lucatorto Michael
-8. Chase II Jeffrey & Li Jiaxin
-9. Wolfson Jonathan & Gallagher Sean & Yifan Xu
-10. Shatokhin Arsenii & Sabado Miguel Enrico
-11. Belson Deirdre & Baron Anthony
+Teams have been assigned for this project and posted on Blackboard. They are fixed - no switching or cooperating across team lines. It is up to teammates to ensure that their partner adheres to the <a href="https://www.american.edu/academics/integrity/code.cfm">American University Honor Code.</a>
 
 ## Step 0 - Background Research.
 1. **Both members** should review the description for <a href="https://en.wikipedia.org/wiki/Group_polarization">Group Polarization</a> on Wikipedia.
-4. **Both members** should work together to devise the new PusherBot class described below.
+1. **Both members** should work together to devise the new PusherBot class described below.
 
 ## Step 1 - Import and Clone the Repo for your Team.
-1. **Both members** of your team will visit <a href='https://classroom.github.com/g/xRiZNxrd'> this link</a>. This will import a repo for your team to Github. For this assignment, you will share the Github repo with your teammate. If you're the first member of your team to visit the link, you can create the team and import the repo - **make sure you create the right team**. If you're the second member to click the link, then **make sure** you join the right team.
-2. **Both members** will clone the repository to your local machines. You will then each have a local repository that is linked to the shared repository, and can work on the code together.
-3. As a reference for how to use git, I suggest <a href='http://codingdomain.com/git/'>this site</a>, as it avoids some of the more complicated theory behind git and focuses on the bare minimum practicalities.
+1. **Both members** will clone the repository to your local machines. You will then each have a local repository that is linked to the shared repository, and can work on the code together.
+1. As a reference for how to use git, I suggest <a href='http://codingdomain.com/git/'>this site</a>, as it avoids some of the more complicated theory behind git and focuses on the bare minimum practicalities.
 
 ## Step 2 - Review the Provided Code.
 In the starter code you have been provided, you will find a superclass called ChatterBot and a subclass called NeutralBot. You will notice that in the class header for the NeutralBot, it says that the NeutralBot *extends* ChatterBot. We will discuss this relationship - **inheritance**- in an upcoming lesson. For now, you should know that all NeutralBots objects are also ChatterBot objects, but not all ChatterBot objects are also NeutralBot objects.
@@ -77,9 +64,9 @@ Do not forget to push your final submission to Github before the deadline.
 Grading will be assigned according to the following categories. As described in the syllabus, each category can receive a  &#10003; (satisfactory); a &#10003;+ (above and beyond); a &#10003;- (incorrect, incomplete, or sloppy); or in the worst case an &#10005;, meaning it was altogether missing or inappropriate (assigned at the instructor's discretion). A category assigned an &#10005; can carry significant grade penalties for this assignment.
 
 1. Repository / Teamwork. Everyone contributed and used the repository well.
-2. Comments and Code Formatting. The code is easy to follow and understand.
-3. Project Design. The code is designed to do what the project requires.
-4. Implementation. The code does what it was designed to do.
+1. Comments and Code Formatting. The code is easy to follow and understand.
+1. Project Design. The code is designed to do what the project requires.
+1. Implementation. The code does what it was designed to do.
 
 Rating | Repository | Form | Design | Implementation
 -|-|-|-|-
