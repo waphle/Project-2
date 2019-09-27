@@ -118,8 +118,8 @@ Missing components receive a score of zero, but it is better to be missing a com
 1. **10%** The code is easy to follow and understand, and a UML diagram is included to clearly communicate the contents of classes.
 1. **10%** The data file is parsed correctly and made available to the Tweet Class and Moderator class in some way.
 1. **20%** Tweet Class supports the required functionality.
-1. **20%** Moderator Class has the required constructor and methods.
-1. **20%** TwitterBot class has the required constructor and methods.
+1. **20%** Moderator Class has the required constructor and methods, and supports the required functionality.
+1. **20%** TwitterBot class has the required constructor and methods, and supports the required functionality..
 1. **10%** The results are printed cleanly at the end.
 
 ## Acknowledgment
