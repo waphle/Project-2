@@ -1,18 +1,50 @@
 # Project 2
-In this project, you will use a data file of tagged social media posts to design a bot that affects the mood of a conversation. This project bears many similarities to the previous project, but uses objects and class inheritance.
+In this project, you will use a data file of tagged social media posts to design a bot. Unlike the previous homework where we kept most of the code in the `main` method, you will be designing classes that interact with each other.
 
+<!-- MarkdownTOC -->
+
+- The Data
+- The Goal
+- Teams
+- Step 1 - Import and Clone the Repo for your Team.
+- Step 2 - Review the Provided Code.
+- Step 3 - Parse the Data File.
+- Step 4 - Give NeutralBots the ability to post.
+- Step 5 - Write your own bot.
+- Step 6 - Provide an environment for lonely bots to chat
+- Step 7 - Kick it all off.
+- Step 8 - Push to Github
+- Grading
+- Acknowledgment
+
+<!-- /MarkdownTOC -->
+
+
+## The Data
 You are being provided with a data set of 5113 tweets in a file (*full-corpus.csv*). This is a comma-separated value file (.csv) which is a human-readable file type in which each line contains data. Pieces of data are separated by a comma, and for this data set, there are five pieces of data (i.e., fields) per line. You can open up the file in any text editor (e.g., Sublime) or even Excel if you want to look at the data directly (and you should always inspect your data!). The first line contains the name of the fields: "Topic" (what is this tweet about?), "Sentiment" (is this tweet positive about that topic, negative, neutral, or irrelevant?), "TweetId" (a unique ID used by Twitter - all of these will be different), "TweetDate" (when did this get tweeted?), and "TweetText" (what did the tweet actually say?).
 
 **Notice - these are real tweets from real twitter users, and do not reflect the view of your instructor, department, or university. Tweets may contain foul language  or worse.**
 
-**Notice - some of the tweets are tagged as 'irrelevant'. For this project, they truly are. You may safely ignore them.**
+Here is what the first few lines of the file looks like as a table:
+
+> "Topic","Sentiment","TweetId","TweetDate","TweetText"
+>
+> "apple","positive","126415614616154112","Tue Oct 18 21:53:25 +0000 2011","Now all @Apple has to do is get swype on the iphone and it will be crack. Iphone that is"
+>
+> "apple","positive","126404574230740992","Tue Oct 18 21:09:33 +0000 2011","@Apple will be adding more carrier support to the iPhone 4S (just announced)"
+
+As this is a comma-separated value (.csv) file, it might be easier too look at what data these lines represent:
+
+"Topic"|"Sentiment"|"TweetId"|"TweetDate"|"TweetText"
+-|-|-|-|-
+"apple"|"positive"|"126415614616154112"|"Tue Oct 18 21:53:25 +0000 2011"|"Now all @Apple has to do is get swype on the iphone and it will be crack. Iphone that is"
+"apple"|"positive"|"126404574230740992"|"Tue Oct 18 21:09:33 +0000 2011"|"@Apple will be adding more carrier support to the iPhone 4S (just announced)"
+
+## The Goal
+For this project you will be designing
 
 # Teams
-Teams have been assigned for this project and posted on Blackboard. They are fixed - no switching or cooperating across team lines. It is up to teammates to ensure that their partner adheres to the <a href="https://www.american.edu/academics/integrity/code.cfm">American University Honor Code.</a>
-
-## Step 0 - Background Research.
-1. **Both members** should review the description for <a href="https://en.wikipedia.org/wiki/Group_polarization">Group Polarization</a> on Wikipedia.
-1. **Both members** should work together to devise the new PusherBot class described below.
+Teams have not been assigned for this project, but you are expected to work with a partner. However - no cooperating across team lines. It is up to teammates to ensure that their partner adheres to the <a href="https://www.american.edu/academics/integrity/code.cfm">American University Honor Code.</a>
 
 ## Step 1 - Import and Clone the Repo for your Team.
 1. **Both members** will clone the repository to your local machines. You will then each have a local repository that is linked to the shared repository, and can work on the code together.
@@ -57,7 +89,7 @@ Create a `Test` class with a main method from which to run your program. This cl
 
 The loop should run until either the mean mood of the ChatRoom is below 0.1 or above 1.9, or for 1000 iterations, whichever comes first. When the loop terminates, the system should print out the number of messages posted by all bots, the number of iterations, and the final mood mean and variance values.
 
-## Step 7 - Push to Github
+## Step 8 - Push to Github
 Do not forget to push your final submission to Github before the deadline.
 
 # Grading
@@ -73,3 +105,6 @@ Rating | Repository | Form | Design | Implementation
 &#10003;+ | Evidence of branching and merging. | Project is commented and styled according to [Javadoc](https://www.oracle.com/technetwork/java/javase/documentation/index-137868.html) Guidelines. | Project includes all steps and an additional `DividerBot` class that attempts to maximize the variance of the mood in the ChatRoom. | Project is free of logical and syntax errors; extensive and creative use of Java commands and classes to reduce length and/or complexity.
 &#10003; | Multiple commits from each teammate | Project is commented and styled neatly. | Project includes working steps 1-5 with a visible attempt to complete the remaining steps. | Project compiles
 &#10003;- | Evidence that one teammate did most of the work and/or all commits were through web interface | Comments are sparse and/or code styling is difficult to follow. | Project missing `PusherBot` design and/or `Test` class with main method | Project compiles with some minor correction
+
+## Acknowledgment
+Data for this assignment comes from Sanders Analytics, and is compiled (among other places) in a [Github repo](https://github.com/zfz/twitter_corpus) by u/zfz.
