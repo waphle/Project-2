@@ -23,13 +23,22 @@ class TwitterBot {
   -topic: String
   -sentiment: String
   -irreTweetProbability: float
+  -guessMade: boolean
   
   -TwitterBot()
   -TwitterBot(topic: String, sentiment: string, prob: float)
   
+  +getTopic(): String
+  +getSentiment(): String
+  +getIrreTweetPorbability(): float
+  
+  +setTopic(topic: String): void
+  +setSentiment(sentm: String): void
+  +setIrreTweetProb(prob: float): void
+  
   +replay(tweetIn: Tweet): Tweet
-  +createBots(n: int): Tweet[]
-  +createBotsRand(n: int, prob: float): Tweet[]
+  +createBots(n: int): TwitterBot[]
+  +createBots(n: int, topic: String, sentm: String, prob: float): TwitterBot[]
   +guess(topic: String, sentiment: String): boolean
 }
 
