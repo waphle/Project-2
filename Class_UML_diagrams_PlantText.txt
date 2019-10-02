@@ -1,0 +1,40 @@
+@startuml
+
+title CSC281 Project-2 Classes
+
+
+class Tweet {
+  -topic: String
+  -sentiment: String
+  -Id: String
+  -date: String
+  -text: String
+
+  +Tweet(fields: String[])
+  
+  +getTopic(): String
+  +getSentiment(): String
+  +getId(): String
+  +getDate(): String
+  +getText(): String
+}
+
+class TwitterBot {
+  -topic: String
+  -sentiment: String
+  -irreTweetProbability: float
+  
+  -TwitterBot()
+  -TwitterBot(topic: String, sentiment: string, prob: float)
+  
+  +replay(tweetIn: Tweet): Tweet
+  +createBots(n: int): Tweet[]
+  +createBotsRand(n: int, prob: float): Tweet[]
+  +guess(topic: String, sentiment: String): boolean
+}
+
+class Moderator {
+  +main(args: String[]): static void
+}
+
+@enduml
