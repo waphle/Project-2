@@ -36,7 +36,7 @@ class TwitterBot {
   +setSentiment(sentm: String): void
   +setIrreTweetProb(prob: float): void
   
-  +replay(tweetIn: Tweet): Tweet
+  +reply(tweetIn: Tweet): Tweet
   +createBots(n: int): TwitterBot[]
   +createBots(n: int, topic: String, sentm: String, prob: float): TwitterBot[]
   +guess(topic: String, sentiment: String): boolean
