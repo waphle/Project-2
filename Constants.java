@@ -9,4 +9,6 @@ public class Constants {
    public final static String RESPONSE_AGREE = "I agree.";
    public final static String RESPONSE_DISAGREE = "I disagree.";
    public final static String RESPONSE_NOCOMMENTS = "No comments.";
+   
+   public final static String TWEEK_FIELD_DELIMITER = "\",\"";
 }
