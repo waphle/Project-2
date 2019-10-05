@@ -36,10 +36,13 @@ public class Moderator {
          count++;
       }
       
+      // Number of tweets in the backlog
+      int nTweets = tweetBacklog.size();
+      
       // Create TwitterBobs
       int nBots = defaultNumBots;
       String topic = "", sentm = "";
-      float prob = 0.0f;
+      float prob = -1.0f; // Not use topic-irrelevant tricks for now
       
       System.out.println("Welcome to the Twitterb bot moderator!");
       System.out.printf("Please enter the number of Twitter bots you want me to play with (>= %d): ", defaultNumBots);
@@ -57,17 +60,42 @@ public class Moderator {
       }
       
       // Test each of the twitter bots by spamming them with sample tweets
-      int curTweetIndex = 0; // index of the current tweek in the tweet backlog
-      for (int i = 0; i < nBots; i++) {   // for each of the bots
-         // Set the attributes of the bot with those of a setting tweek from the tweet backlog
-         int settingIndex = curTweetIndex / defaultNumSpams;
+      Vector correctBotIndece = new Vector(); // Indece of correctly identified bots
+      int tweetIndex = 0; // Index of the current tweek in the tweet backlog
+      
+      for (int i = 0; i < nBots; i++) {   // For each of the bots
+         TwitterBot curBot = twitterBotStock[i];
+         
+         // Set the attributes of the bot with those of a setting tweek extracted from the tweet backlog
+         int settingIndex = tweetIndex / defaultNumSpams;
          Tweet settingTweet = (Tweet)tweetBacklog.get(settingIndex);
-         twitterBotStock[i].setTopic(settingTweet.getTopic());
-         twitterBotStock[i].setSentiment(settingTweet.getSentiment());
-         for (int j = 0; j < defaultNumSpams; j++) {  // test the bot with 1000 sample tweets
-            Tweet curtweet = (Tweet)tweetBacklog.get(j);
-            curTweetIndex++;
+         curBot.setTopic(settingTweet.getTopic());
+         curBot.setSentiment(settingTweet.getSentiment());
+         
+         // Test the bot with 1000 sample tweets from the backlog
+         int correctResps = 0; // Number of correct response
+         for (int j = 0; j < defaultNumSpams; j++) {
+            Tweet tweet = (Tweet)tweetBacklog.get(tweetIndex);           
+            Tweet response = curBot.reply(tweet);
+            if (response.getSentiment() == tweet.getSentiment()) {
+               correctResps++;
+            }
+            
+            // Reset current tweet pointer to reuse the tweets in the backlog
+            tweetIndex++;
+            if (tweetIndex >= nTweets)
+               tweetIndex %= nTweets;     
+         }
+         
+         // Vet the tweet responder to be a bot or not - if the response correctness rate  
+         // is less than 50%, the responder is regarded as a bot, and record it.
+         if (correctResps < defaultNumSpams/2) {
+            correctBotIndece.add(i);
          }
       }
+      
+      // Print out the twitter bot identification results
+      System.out.printf("Percentage of correctly identified twitter bots: %.2f", (float)correctBotIndece.size() / nBots);
+      
    }
 }
