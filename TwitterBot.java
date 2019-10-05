@@ -75,7 +75,7 @@ public class TwitterBot {
       String id = Long.toString(rand.nextLong());
       String date = (new Date()).toString();
       String text;
-      String[] fields = new String[Constants.NUM_TWEET_FIELDS];
+      String[] fields = new String[Constants.TWEET_NUM_OF_FIELDS];
       
       if (this.sentiment.equalsIgnoreCase(Constants.SENTIM_POSITIVE)) {
          sentm = Constants.SENTIM_POSITIVE;
