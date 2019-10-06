@@ -51,8 +51,11 @@ public class TwitterBot {
       
       // Apply irrelevent tweet probability to the output bots
       for (int i=0; i<bots.length; i++) {
+         bots[i] = new TwitterBot(topic, sentm, prob);
+         
+         // Switch tweet's sentiment up to the given irrelevant tweet probability
          float randProb = rand.nextFloat();
-         if (randProb <= prob) { // Regards as a irrelevant tweet and switch tweet's sentiment
+         if (randProb < prob) {
             if (bots[i].getSentiment().equalsIgnoreCase(Constants.SENTIM_POSITIVE)) {
                bots[i].setSentiment(Constants.SENTIM_NEGATIVE);
             }
@@ -72,7 +75,7 @@ public class TwitterBot {
    Tweet reply(Tweet inTweet) {
       String topic = inTweet.getTopic();
       String sentm = Constants.SENTIM_NEUTRAL;
-      String id = Long.toString(rand.nextLong());
+      String id = Long.toString(rand.nextInt(Integer.MAX_VALUE));
       String date = (new Date()).toString();
       String text;
       String[] fields = new String[Constants.TWEET_NUM_OF_FIELDS];

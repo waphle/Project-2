@@ -5,6 +5,7 @@ public class Moderator {
 
    private static final int defaultNumBots = 100;
    private static final int defaultNumSpams = 1000;
+   private static final float defaultBotRespCorrectness = 0.50f; // 50%
    
    public static void main(String[] args) throws Exception {
    
@@ -41,14 +42,23 @@ public class Moderator {
       
       // Create TwitterBobs
       int nBots = defaultNumBots;
-      String topic = "", sentm = "";
-      float prob = -1.0f; // Not use topic-irrelevant tricks for now
+      float botThreshold = defaultBotRespCorrectness * 100.0f; // Bot identification threshold (response percentage)
+      String topic = Constants.TOPIC_NONE;
+      String sentm = Constants.SENTIM_NEUTRAL;
+      float prob = 0.0f; // Topic-irrelevant trick probability applied to the twitter bots: when prob = 0, no tricks applied.
       
       System.out.println("Welcome to the Twitterb bot moderator!");
       System.out.printf("Please enter the number of Twitter bots you want me to play with (>= %d): ", defaultNumBots);
       nBots = consoleInput.nextInt();
       if (nBots < defaultNumBots) {
          System.out.printf("Oops, you have to make the number of bots equal or greater than %d. Please try it again.", defaultNumBots);
+         return;
+      }
+      
+      System.out.printf("Please enter the bot vetting threshold percentage: ");
+      botThreshold = consoleInput.nextFloat();
+      if (botThreshold < 0.0f || botThreshold > 100.0f) {
+         System.out.printf("Oops, the percentage number %f is invalid. Please try it again.", botThreshold);
          return;
       }
       
@@ -75,9 +85,9 @@ public class Moderator {
          // Test the bot with 1000 sample tweets from the backlog
          int correctResps = 0; // Number of correct response
          for (int j = 0; j < defaultNumSpams; j++) {
-            Tweet tweet = (Tweet)tweetBacklog.get(tweetIndex);           
+            Tweet tweet = (Tweet)tweetBacklog.get(tweetIndex);
             Tweet response = curBot.reply(tweet);
-            if (response.getSentiment() == tweet.getSentiment()) {
+            if (response.getSentiment().equalsIgnoreCase(tweet.getSentiment())) {
                correctResps++;
             }
             
@@ -88,14 +98,14 @@ public class Moderator {
          }
          
          // Vet the tweet responder to be a bot or not - if the response correctness rate  
-         // is less than 50%, the responder is regarded as a bot, and record it.
-         if (correctResps < defaultNumSpams/2) {
+         // is less than the given threshold, the responder is regarded as a bot, and record it.
+         if (correctResps * 100.0f / defaultNumSpams < botThreshold) {
             correctBotIndece.add(i);
          }
       }
       
       // Print out the twitter bot identification results
-      System.out.printf("Percentage of correctly identified twitter bots: %.2f", (float)correctBotIndece.size() / nBots);
+      System.out.printf("Percentage of correctly identified twitter bots: %.2f%%", (float)correctBotIndece.size() * 100 / nBots);
       
    }
 }
