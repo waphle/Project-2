@@ -7,6 +7,13 @@ public class Moderator {
    private static final int defaultNumSpams = 1000;
    private static final float defaultBotRespCorrectness = 0.50f; // 50%
    
+   // Topic start indece in the tweet backlog
+   private static final int[] topicStartIndece = { 0,         // "Apple"
+                                                   1142,      // "Google"
+                                                   2459,      // "Microsoft"
+                                                   3824       // "Twitter"
+                                                 };                                                  
+   
    public static void main(String[] args) throws Exception {
    
       java.io.File file = new java.io.File("full-corpus.csv");
@@ -42,7 +49,7 @@ public class Moderator {
       
       // Create TwitterBobs
       int nBots = defaultNumBots;
-      float botThreshold = defaultBotRespCorrectness * 100.0f; // Bot identification threshold (response percentage)
+      float botThreshold = defaultBotRespCorrectness * 100.0f; // Bot identification threshold (Correct response percentage)
       String topic = Constants.TOPIC_NONE;
       String sentm = Constants.SENTIM_NEUTRAL;
       float prob = 0.0f; // Topic-irrelevant trick probability applied to the twitter bots: when prob = 0, no tricks applied.
@@ -55,7 +62,7 @@ public class Moderator {
          return;
       }
       
-      System.out.printf("Please enter the bot vetting threshold percentage: ");
+      System.out.printf("Please enter the bot vetting threshold (bot response correctness percentage): ");
       botThreshold = consoleInput.nextFloat();
       if (botThreshold < 0.0f || botThreshold > 100.0f) {
          System.out.printf("Oops, the percentage number %f is invalid. Please try it again.", botThreshold);
@@ -70,42 +77,70 @@ public class Moderator {
       }
       
       // Test each of the twitter bots by spamming them with sample tweets
-      Vector correctBotIndece = new Vector(); // Indece of correctly identified bots
+      Vector correctBotIndece = new Vector();   // Indece of correctly identified bots
+      Vector correctCountsTopicPlusSentiments = new Vector();  // Count of Topic+Sentiments of the correctly identified bots
+      Vector incorrectBotIndece = new Vector();   // Indece of wrongly identified bots
+      Vector incorrectCountsTopicPlusSentiments = new Vector();  // Count of Topic+Sentiments of the wrongly identified bots
       int tweetIndex = 0; // Index of the current tweek in the tweet backlog
       
       for (int i = 0; i < nBots; i++) {   // For each of the bots
          TwitterBot curBot = twitterBotStock[i];
          
-         // Set the attributes of the bot with those of a setting tweek extracted from the tweet backlog
-         int settingIndex = tweetIndex / defaultNumSpams;
+         // Set the attributes of the bot with those of the start tweet of a same topic in the tweet backlog
+         int settingIndex = topicStartIndece[nBots % topicStartIndece.length];
          Tweet settingTweet = (Tweet)tweetBacklog.get(settingIndex);
          curBot.setTopic(settingTweet.getTopic());
          curBot.setSentiment(settingTweet.getSentiment());
          
          // Test the bot with 1000 sample tweets from the backlog
-         int correctResps = 0; // Number of correct response
+         int correctResps = 0;   // Number of correct response
          for (int j = 0; j < defaultNumSpams; j++) {
             Tweet tweet = (Tweet)tweetBacklog.get(tweetIndex);
             Tweet response = curBot.reply(tweet);
-            if (response.getSentiment().equalsIgnoreCase(tweet.getSentiment())) {
+            // Only when the topic and sentiment of a bot's response match those
+            // of the input tweet, the response is regarded as correct:
+            if (response.getTopic().equalsIgnoreCase(tweet.getTopic()) &&
+                response.getSentiment().equalsIgnoreCase(tweet.getSentiment())) { 
                correctResps++;
             }
             
-            // Reset current tweet pointer to reuse the tweets in the backlog
+            // Reset current tweet pointer to reuse the tweets in the backlog when the tweet counter  
+            // exceeds the maximum number of the tweets in the backlog:
             tweetIndex++;
             if (tweetIndex >= nTweets)
                tweetIndex %= nTweets;     
          }
          
-         // Vet the tweet responder to be a bot or not - if the response correctness rate  
-         // is less than the given threshold, the responder is regarded as a bot, and record it.
-         if (correctResps * 100.0f / defaultNumSpams < botThreshold) {
+         // Vet the tweet responder to be a bot or not - if the response correctness percentage  
+         // is less than the given threshold, the responder is regarded as a bot, and its index is recorded:
+         float correctPercentage = correctResps * 100.0f / defaultNumSpams;
+         if ( correctPercentage < botThreshold) {
             correctBotIndece.add(i);
+            correctCountsTopicPlusSentiments.add(correctResps);
+         }
+         else {
+            incorrectBotIndece.add(i);
+            incorrectCountsTopicPlusSentiments.add(defaultNumSpams - correctResps);
          }
       }
       
       // Print out the twitter bot identification results
-      System.out.printf("Percentage of correctly identified twitter bots: %.2f%%", (float)correctBotIndece.size() * 100 / nBots);
+      System.out.println();
+      System.out.printf("Percentage of correctly identified twitter bots: %.2f%%\n", (float)correctBotIndece.size() * 100 / nBots);
       
+      System.out.printf("Counts of correct responses out of %d spams of the correctly identified bots:\n", defaultNumSpams);
+      for (int i = 0; i < correctBotIndece.size(); i++) {
+         int index = (int)correctBotIndece.get(i);
+         int respCount = (int)correctCountsTopicPlusSentiments.get(i);
+         System.out.printf("Twitter Bot #%d: %d\n", index, respCount);
+      }
+      
+      System.out.println();
+      System.out.printf("Counts of incorrect responses out of %d spams of the wrongly identified bots:\n", defaultNumSpams);
+      for (int i = 0; i < incorrectBotIndece.size(); i++) {
+         int index = (int)incorrectBotIndece.get(i);
+         int respCount = (int)incorrectCountsTopicPlusSentiments.get(i);
+         System.out.printf("Twitter Bot #%d: %d\n", index, respCount);
+      }
    }
 }
