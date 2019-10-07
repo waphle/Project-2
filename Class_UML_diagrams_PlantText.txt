@@ -43,7 +43,26 @@ class TwitterBot {
 }
 
 class Moderator {
+  -defaultNumBots: static final int
+  -defaultNumSpams: static final int
+  -defaultBotRespCorrectness: static final float
+  -topicStartIndece: static final int[]
+  
   +main(args: String[]): static void
+}
+
+class Constants {
+  +TWEET_NUM_OF_FIELDS: final static int
+  
+  +SENTIM_POSITIVE: final static String
+  +SENTIM_NEGATIVE: final static String
+  +SENTIM_NEUTRAL: final static String
+  
+  +TOPIC_NONE: final static String
+  
+  +RESPONSE_AGREE: final static String
+  +RESPONSE_DISAGREE: final static String
+  +RESPONSE_NOCOMMENTS: final static String
 }
 
 @enduml
