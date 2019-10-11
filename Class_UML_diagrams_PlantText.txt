@@ -53,6 +53,7 @@ class Moderator {
 
 class Constants {
   +TWEET_NUM_OF_FIELDS: final static int
+  +TWEET_FIELD_DELIMITER: final static String
   
   +SENTIM_POSITIVE: final static String
   +SENTIM_NEGATIVE: final static String
