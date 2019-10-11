@@ -54,6 +54,7 @@ public class Moderator {
       String sentm = Constants.SENTIM_NEUTRAL;
       float prob = 0.0f; // Topic-irrelevant trick probability applied to the twitter bots: when prob = 0, no tricks applied.
       
+      // User inputs
       System.out.println("Welcome to the Twitterb bot moderator!");
       System.out.printf("Please enter the number of Twitter bots you want me to play with (>= %d): ", defaultNumBots);
       nBots = consoleInput.nextInt();
@@ -87,7 +88,7 @@ public class Moderator {
          TwitterBot curBot = twitterBotStock[i];
          
          // Set the attributes of the bot with those of the start tweet of a same topic in the tweet backlog
-         int settingIndex = topicStartIndece[nBots % topicStartIndece.length];
+         int settingIndex = topicStartIndece[i % topicStartIndece.length];
          Tweet settingTweet = (Tweet)tweetBacklog.get(settingIndex);
          curBot.setTopic(settingTweet.getTopic());
          curBot.setSentiment(settingTweet.getSentiment());
@@ -108,13 +109,13 @@ public class Moderator {
             // exceeds the maximum number of the tweets in the backlog:
             tweetIndex++;
             if (tweetIndex >= nTweets)
-               tweetIndex %= nTweets;     
+               tweetIndex %= nTweets;   
          }
          
          // Vet the tweet responder to be a bot or not - if the response correctness percentage  
          // is less than the given threshold, the responder is regarded as a bot, and its index is recorded:
          float correctPercentage = correctResps * 100.0f / defaultNumSpams;
-         if ( correctPercentage < botThreshold) {
+         if (correctPercentage < botThreshold) {
             correctBotIndece.add(i);
             correctCountsTopicPlusSentiments.add(correctResps);
          }
@@ -136,7 +137,7 @@ public class Moderator {
       }
       
       System.out.println();
-      System.out.printf("Counts of incorrect responses out of %d spams of the wrongly identified bots:\n", defaultNumSpams);
+      System.out.printf("Counts of correct responses out of %d spams of the incorrectly identified bots:\n", defaultNumSpams);
       for (int i = 0; i < incorrectBotIndece.size(); i++) {
          int index = (int)incorrectBotIndece.get(i);
          int respCount = (int)incorrectCountsTopicPlusSentiments.get(i);

@@ -31,7 +31,7 @@ public class TwitterBot {
    // Getters
    public String getTopic() { return this.topic; }
    public String getSentiment() { return this.sentiment; }
-   public float getIrreTweetPorbability() { return irreTweetProbability; }
+   public float getIrreTweetPorbability() { return this.irreTweetProbability; }
    
    // Setters
    public void setTopic(String topic) { this.topic = topic; }
