@@ -1,6 +1,3 @@
 import java.util.Scanner;
-
-public class TwitterBot {
-  
-  
-}
+import java.util.Random;
+import java.util.Date;
