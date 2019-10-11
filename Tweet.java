@@ -1,3 +1,10 @@
 public class Tweet{
-  //Wow, such empty
+   private String topic;
+   private String sentiment;
+   private String ID;
+   private String date;
+   private String text;
+   
+   
+
 }
