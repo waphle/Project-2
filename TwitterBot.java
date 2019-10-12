@@ -18,6 +18,35 @@ public class TwitterBot {
       this.guessMade = false;
    }
    
-   private TwitterBot(String topic
-     
+   private TwitterBot(String topic, String sentm, float prob) {
+      this.topic = topic;
+      this.sentiment = sentm;
+      this irreTweetProbability = prob;
+      this.guessMade = false;
+   }
+   
+   // Name
+   public String getTopic() { retun this.topic; }
+   public String getSentiment() { return this.sentiment; }
+   public float getIrreTweetPorbability() {return this.irreTweenProbability; }
+   
+   // Name
+   public void setTopic(String topic) { this.topic = topic; }
+   public void setSentiment() return this,sentiment;} //
+   public void setIrreTweetProb(float prob) { this.irreTweetProbability = prob; }
+   
+   
+   //Create n number of Twitter Bots with the default settings
+   public static TwitterBot[] createBots(int n, String topic, String sentm, float prob) {
+      TwitterBot[] bots = new TwitterBot[n];
+      
+      // Name
+      for (int i = 0; i < bots.length; i++) {
+         bots[i] = new TwitterBot(topic, sentm, prob);
+         
+         
+      }
+   }
+   
+   
 }
