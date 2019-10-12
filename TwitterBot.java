@@ -25,26 +25,32 @@ public class TwitterBot {
       this.guessMade = false;
    }
    
-   // Name
+   // Getters and Methods
    public String getTopic() { retun this.topic; }
    public String getSentiment() { return this.sentiment; }
    public float getIrreTweetPorbability() {return this.irreTweenProbability; }
    
-   // Name
+   // Setters
    public void setTopic(String topic) { this.topic = topic; }
    public void setSentiment() return this,sentiment;} //
    public void setIrreTweetProb(float prob) { this.irreTweetProbability = prob; }
    
+   // Create n Twitter bots with the default settings
+   public static TwitterBot[] createBots(int n) {
+      TwitterBot[] bots = new TwitterBot[n];
+      
+      return bots; 
+   }
    
-   //Create n number of Twitter Bots with the default settings
+   //Create n number of Twitter bots with the given settings
    public static TwitterBot[] createBots(int n, String topic, String sentm, float prob) {
       TwitterBot[] bots = new TwitterBot[n];
       
-      // Name
+      // Apply irrelevant Tweet probability to the output bots
       for (int i = 0; i < bots.length; i++) {
          bots[i] = new TwitterBot(topic, sentm, prob);
          
-         // Switch tweet's sentiment up to the given irrelevant tweet probability
+         // Switch Tweet's sentiment up to the given irrelevant tweet probability
          float  randProb = rand.nextFloat();
          if (randProb < prob) {
             if (bots[i].getSentiment().equalsIgnoreCase(Constants.SENTIM_POSITIVE)) {
@@ -65,12 +71,11 @@ public class TwitterBot {
    
    // Respond a tweet with given sentiments
    Tweet reply(Tweet inTweet) {
-      String topio = inTweet.getTopic();
-      String sentm = Constants.SENTIM_Neutural;
+      String topic = inTweet.getTopic();
+      String sentm = Constants.SENTIM_NEUTRAL;
       String id = Long.toString(rand.nextInt(Integer.MAX_VALUE));
-      String date = (new date()).toString();
-      String Next;
-      String[] fields = new String[Constants.TWEET_NUM_OF_FIELDS];
-      
+      String date = (new Date()).toString();
+      String text;
+      String[] fields = new String[Constants.TWEET_NUM_OF_FIELDS];      
    
 }
