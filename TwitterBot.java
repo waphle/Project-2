@@ -44,8 +44,23 @@ public class TwitterBot {
       for (int i = 0; i < bots.length; i++) {
          bots[i] = new TwitterBot(topic, sentm, prob);
          
-         
+         // Switch tweet's sentiment up to the given irrelevant tweet probability
+         float  randProb = rand.nextFloat();
+         if (randProb < prob) {
+            if (bots[i].getSentiment().equalsIgnoreCase(Constants.SENTIM_POSITIVE)) {
+               bots[i].setSentiment(Constants.SENTIM_NEGATIVE);
+            }
+            else if (bots[i].getSentiment().equalsIgnoreCase(Constants.SENTIM_NEGATIVE)) {
+              bots[i].setSentiment(Constants.SENTIM_POSITIVE);
+            }
+            else {
+               bots[i].setSentiment(Constants.SENTIM_POSITIVE); // Convert "neutral" into "positive" only
+            }
+         }
       }
+  
+      return bots;
+      
    }
    
    
