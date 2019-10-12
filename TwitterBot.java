@@ -63,5 +63,14 @@ public class TwitterBot {
       
    }
    
+   // Respond a tweet with given sentiments
+   Tweet reply(Tweet inTweet) {
+      String topio = inTweet.getTopic();
+      String sentm = Constants.SENTIM_Neutural;
+      String id = Long.toString(rand.nextInt(Integer.MAX_VALUE));
+      String date = (new date()).toString();
+      String Next;
+      String[] fields = new String[Constants.TWEET_NUM_OF_FIELDS];
+      
    
 }
