@@ -78,4 +78,38 @@ public class TwitterBot {
       String text;
       String[] fields = new String[Constants.TWEET_NUM_OF_FIELDS];      
    
+      if (this.sentiment.equalsIgnoreCase(Constants.SENTIM_POSITIVE)) {
+         sentm = Constants.SENTIM_POSITIVE;
+         text = Constants.RESPONSE_DISAGREE;
+      }
+      else if (this.sentiment.equalsIgnoreCase(Constants.SENTIM_NEGATIVE)) {
+         sentm = Constants.SENTIM_NEGATIVE;
+         text = Constants.RESPONSE_DISAGREE;
+      }
+      else {
+         sentm = Constants.SENTIM_NEUTRAL
+         text = Constants.SENTIM_NOCOMMENT;
+      }
+      
+      // Populate response tweet fields
+      fields[0] = topic;
+      fields[1] = sentm;
+      fields[2] = id;}
+      fields[3] = date;
+      fields[4] = text;
+      
+      
+      Tweet rsps = new Tweet(fields);
+      
+      return rsps;
+   }
+   
+   // Guess bot's design
+   public boolean guess(String topic, String sentm) {
+      if (guessMade) {
+         return false;
+      }
+      
+      return topic.equalsIgnoreCase(this.topic) && sentm.equalsIgnoreCase(this.sentiment);
+   }
 }
