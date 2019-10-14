@@ -1,0 +1,69 @@
+@startuml
+
+title CSC281 Project-2 Classes
+
+
+class Tweet {
+  -topic: String
+  -sentiment: String
+  -Id: String
+  -date: String
+  -text: String
+
+  +Tweet(fields: String[])
+  
+  +getTopic(): String
+  +getSentiment(): String
+  +getId(): String
+  +getDate(): String
+  +getText(): String
+}
+
+class TwitterBot {
+  -topic: String
+  -sentiment: String
+  -irreTweetProbability: float
+  -guessMade: boolean
+  
+  -TwitterBot()
+  -TwitterBot(topic: String, sentiment: string, prob: float)
+  
+  +getTopic(): String
+  +getSentiment(): String
+  +getIrreTweetPorbability(): float
+  
+  +setTopic(topic: String): void
+  +setSentiment(sentm: String): void
+  +setIrreTweetProb(prob: float): void
+  
+  +reply(tweetIn: Tweet): Tweet
+  +createBots(n: int): TwitterBot[]
+  +createBots(n: int, topic: String, sentm: String, prob: float): TwitterBot[]
+  +guess(topic: String, sentiment: String): boolean
+}
+
+class Moderator {
+  -defaultNumBots: static final int
+  -defaultNumSpams: static final int
+  -defaultBotRespCorrectness: static final float
+  -topicStartIndece: static final int[]
+  
+  +main(args: String[]): static void
+}
+
+class Constants {
+  +TWEET_NUM_OF_FIELDS: final static int
+  +TWEET_FIELD_DELIMITER: final static String
+  
+  +SENTIM_POSITIVE: final static String
+  +SENTIM_NEGATIVE: final static String
+  +SENTIM_NEUTRAL: final static String
+  
+  +TOPIC_NONE: final static String
+  
+  +RESPONSE_AGREE: final static String
+  +RESPONSE_DISAGREE: final static String
+  +RESPONSE_NOCOMMENTS: final static String
+}
+
+@enduml
